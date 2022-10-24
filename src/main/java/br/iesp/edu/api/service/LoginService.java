@@ -22,7 +22,7 @@ public class LoginService {
             String s = cadastro.getSenha();
             byte[] senhadecode = Base64.getDecoder().decode(s);
             String senha = new String(senhadecode);
-            if( senha == login.getSenha()){
+            if( senha.equals(login.getSenha()) ){
                 return  "Success";
             }else{
                 return "Dados Invalidos";
