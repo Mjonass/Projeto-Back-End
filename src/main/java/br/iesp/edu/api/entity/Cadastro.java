@@ -25,7 +25,8 @@ public class Cadastro {
     private int codigoSegurança;
     private String nomeDotitularDOcartao;
     private String cpfCnpj;
-    private String email;
     private String senha;
     private String confirmarsenha;
+    @Column(unique = true)
+    private String email;
 }
