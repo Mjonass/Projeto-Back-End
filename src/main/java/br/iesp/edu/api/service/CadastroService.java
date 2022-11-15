@@ -6,6 +6,8 @@ import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
@@ -17,8 +19,10 @@ public class CadastroService {
     public Cadastro salvar(Cadastro cadastro) throws NoSuchAlgorithmException {
         if(cadastro.getSenha().equals(cadastro.getConfirmarsenha())){
 
-            String senha = new Base64().encodeToString(cadastro.getSenha().getBytes());
-            String confirmarSenha = new Base64().encodeToString(cadastro.getConfirmarsenha().getBytes());
+
+
+            String senha = byteToHex(cadastro.getSenha().getBytes());
+            String confirmarSenha = byteToHex(cadastro.getConfirmarsenha().getBytes());
 
             cadastro.setSenha(senha);
             cadastro.setConfirmarsenha(confirmarSenha);
@@ -30,6 +34,23 @@ public class CadastroService {
         }
         return cadastro;
 
+    }
+    public static byte[] getHash(String password) throws NoSuchAlgorithmException{
+        MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+        byte[] hash;
+        return hash = messageDigest.digest(password.getBytes(StandardCharsets.UTF_8));
+    }
+    public static String byteToHex(byte[] hash) {
+        StringBuffer hexString = new StringBuffer();
+        for (int i = 0; i < hash.length; i++) {
+            String hex = Integer.toHexString(255 & hash[i]);
+            if (hex.length() == 1) {
+                hexString.append('0');
+            }
+            hexString.append(hex);
+        }
+        System.out.println(hexString);
+        return hexString.toString();
     }
 
     public Cadastro atualizar(Cadastro cadastro){

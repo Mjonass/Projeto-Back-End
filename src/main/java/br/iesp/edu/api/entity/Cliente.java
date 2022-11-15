@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 
@@ -26,6 +24,8 @@ public class Cliente {
     @JsonFormat(pattern = "dd/mm/yy")
     private LocalDate dataDENascimento;
     private String benefuicios ;
-    private String assinatura;
+    @OneToOne
+    @JoinColumn(name ="assinatura")
+    private Assinatura assinatura;
 
 }
