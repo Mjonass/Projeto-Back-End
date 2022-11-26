@@ -25,9 +25,9 @@ public class LoginService {
         System.out.println("####################"+cadastro);
         if(cadastro != null){
             String s = cadastro.getSenha();
-            byte[] senhadecode = Base64.getDecoder().decode(s);
-            String senha = new String(senhadecode);
-            if( senha.equals(login.getSenha()) ){
+
+            String senha = byteToHex(login.getSenha().getBytes());
+            if( s.equals(senha) ){
                 autenticado = true;
                 return  "Success";
             }else{
@@ -49,6 +49,19 @@ public class LoginService {
         }
 
         return msg;
+    }
+
+    public static String byteToHex(byte[] hash) {
+        StringBuffer hexString = new StringBuffer();
+        for (int i = 0; i < hash.length; i++) {
+            String hex = Integer.toHexString(255 & hash[i]);
+            if (hex.length() == 1) {
+                hexString.append('0');
+            }
+            hexString.append(hex);
+        }
+        System.out.println(hexString);
+        return hexString.toString();
     }
 
 }
