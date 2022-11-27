@@ -13,12 +13,13 @@ public class Entreterimento {
     @GeneratedValue
     private Integer id;
     private String tipo;
-    private String Título;
-    private String Gênero;
-    private String Ano;
-    private String Duração;
-    private String Relevância;
-    private String Sinopse;
-    private String Trailer;
+    private String titulo;
+    private String genero;
+    private String ano;
+    private String duracao;
+    private String relevancia;
+    private String sinopse;
+    private String trailer;
+
 
 }

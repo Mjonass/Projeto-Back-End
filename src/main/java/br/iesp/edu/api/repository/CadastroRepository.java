@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CadastroRepository extends JpaRepository<Cadastro,Integer> {
-
+    @Query(value ="SELECT c FROM Cadastro c where c.email =:idCliente")
+    Cadastro findByEmail(String idCliente);
 }

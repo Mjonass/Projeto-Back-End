@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
+
 
 @Getter
 @Setter
@@ -13,7 +15,9 @@ public class ListaFavoritos {
     @GeneratedValue
     private Integer id;
     @OneToMany
-    @JoinColumn(name ="ListaFavoritos")
-    private Entreterimento entreterimento;
+    @JoinColumn(name ="Entreterimento")
+    private List<Entreterimento> entreterimento;
+
+
 
 }

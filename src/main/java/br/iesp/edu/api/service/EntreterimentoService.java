@@ -1,7 +1,6 @@
 package br.iesp.edu.api.service;
 
 import br.iesp.edu.api.entity.Entreterimento;
-import br.iesp.edu.api.entity.ListaFavoritos;
 import br.iesp.edu.api.repository.EntreterimentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

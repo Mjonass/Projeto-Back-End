@@ -1,6 +1,7 @@
 package br.iesp.edu.api.resource;
 
 
+import br.iesp.edu.api.TO.InputListTO;
 import br.iesp.edu.api.entity.ListaFavoritos;
 import br.iesp.edu.api.service.ListaFavoritosService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,9 @@ public class ListaFavoritosResource {
     @Autowired
     private ListaFavoritosService service;
 
-    @PostMapping
-    public ListaFavoritos salvar(@RequestBody ListaFavoritos listaFavoritos){
-        return service.salvar(listaFavoritos);
+    @PutMapping("/teste")
+    public ListaFavoritos addList(@RequestBody InputListTO listTO){
+        return service.addList(listTO);
     }
 
     @PutMapping

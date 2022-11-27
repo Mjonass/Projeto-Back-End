@@ -1,7 +1,9 @@
 package br.iesp.edu.api.service;
 
 import br.iesp.edu.api.entity.Cadastro;
+import br.iesp.edu.api.entity.ListaFavoritos;
 import br.iesp.edu.api.repository.CadastroRepository;
+import br.iesp.edu.api.repository.ListaFavoritosRepository;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,8 @@ import java.util.List;
 public class CadastroService {
     @Autowired
     private CadastroRepository repository;
+    @Autowired
+    private ListaFavoritosRepository listaFavoritosRepository;
 
     public Cadastro salvar(Cadastro cadastro) throws NoSuchAlgorithmException {
         if(cadastro.getSenha().equals(cadastro.getConfirmarsenha())){
@@ -26,7 +30,9 @@ public class CadastroService {
 
             cadastro.setSenha(senha);
             cadastro.setConfirmarsenha(confirmarSenha);
-
+            ListaFavoritos lisfa = new ListaFavoritos();
+            listaFavoritosRepository.save(lisfa);
+            cadastro.setListaFavoritos(lisfa);
             cadastro = repository.save(cadastro);
 
         }else {
