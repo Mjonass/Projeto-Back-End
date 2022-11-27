@@ -1,5 +1,6 @@
 package br.iesp.edu.api.resource;
 
+import br.iesp.edu.api.TO.CartaoTO;
 import br.iesp.edu.api.entity.Cadastro;
 import br.iesp.edu.api.service.CadastroService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,10 @@ public class CadastroResouce {
     @PutMapping
     public Cadastro atualizar(@RequestBody Cadastro cadastro){
         return service.atualizar(cadastro);
+    }
+    @PutMapping("/atualizarDadosCartao")
+    public Cadastro AtualizarDadosCartao(@RequestBody CartaoTO CartaoTO){
+        return service.AtualizarDadosCartao(CartaoTO);
     }
 
     @DeleteMapping

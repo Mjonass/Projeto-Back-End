@@ -1,5 +1,6 @@
 package br.iesp.edu.api.service;
 
+import br.iesp.edu.api.TO.CartaoTO;
 import br.iesp.edu.api.entity.Cadastro;
 import br.iesp.edu.api.entity.ListaFavoritos;
 import br.iesp.edu.api.repository.CadastroRepository;
@@ -23,8 +24,6 @@ public class CadastroService {
     public Cadastro salvar(Cadastro cadastro) throws NoSuchAlgorithmException {
         if(cadastro.getSenha().equals(cadastro.getConfirmarsenha())){
 
-
-
             String senha = byteToHex(cadastro.getSenha().getBytes());
             String confirmarSenha = byteToHex(cadastro.getConfirmarsenha().getBytes());
 
@@ -40,6 +39,16 @@ public class CadastroService {
         }
         return cadastro;
 
+    }
+    public Cadastro AtualizarDadosCartao(CartaoTO cartaoTO){
+        Cadastro cadastro = repository.findByCliente(cartaoTO.cliente);
+        System.out.println("####################"+cadastro);
+        cadastro.setNumeroCartao(cartaoTO.numeroCartao);
+        cadastro.setCodigoSegurança(cartaoTO.codigoSegurança);
+        cadastro.setValidadeCartao(cartaoTO.validadeCartao);
+
+        cadastro = repository.save(cadastro);
+        return cadastro;
     }
     public static byte[] getHash(String password) throws NoSuchAlgorithmException{
         MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
@@ -82,4 +91,8 @@ public class CadastroService {
     public List<Cadastro> listarCadastro(){
         return repository.findAll();
     }
+
+
 }
+
+

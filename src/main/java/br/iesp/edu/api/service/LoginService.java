@@ -18,7 +18,6 @@ public class LoginService {
     @Autowired
     private CadastroRepository repositori;
 
-    boolean autenticado = false;
     public String buscarCadastro(Login login){
 
         Cadastro cadastro = repository.findByEmail(login.getEmail());
@@ -27,8 +26,9 @@ public class LoginService {
             String s = cadastro.getSenha();
 
             String senha = byteToHex(login.getSenha().getBytes());
+
+            System.out.println(">>>>>>>>>>>>"+senha);
             if( s.equals(senha) ){
-                autenticado = true;
                 return  "Success";
             }else{
                 return "Dados Invalidos";
@@ -36,19 +36,6 @@ public class LoginService {
         }else{
             return "Cadastro não encontrado";
         }
-    }
-
-    public String atualizarCartao(Cadastro cadastro){
-        String msg;
-        if(autenticado == true ){
-            System.out.println("=========passou  "+cadastro);
-            cadastro = repositori.save(cadastro);
-            msg = "Cadastro atualizado";
-        }else{
-            msg = "Cadastro não autorizado, necessario uma autenticação";
-        }
-
-        return msg;
     }
 
     public static String byteToHex(byte[] hash) {

@@ -20,8 +20,4 @@ public class LoginResource {
         return service.buscarCadastro(login);
     }
 
-    @PutMapping("/atualizarCartao")
-    public String atualizarCartao(@RequestBody Cadastro cadastro){
-        return service.atualizarCartao(cadastro);
-   }
 }
