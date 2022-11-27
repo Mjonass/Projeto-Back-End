@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Getter
@@ -29,4 +26,7 @@ public class Cadastro {
     private String confirmarsenha;
     @Column(unique = true)
     private String email;
+    @OneToOne
+    @JoinColumn(name ="ListaFavoritos")
+    private ListaFavoritos listaFavoritos;
 }
